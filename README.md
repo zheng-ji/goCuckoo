@@ -12,7 +12,7 @@ A Cuckoo hashing, substituting for bloom filter. written by Go
 Description
 -----------
 
-Bloom Filter 的位图模式带来两个问题：一是误报（false positives），它能判断元素一定不存在，但只能判断可能存在，因为存在其它元素被映射到部分相同位上，导致该位置1，那么一个不存在的元素可能会被误报成存在；另一个是漏报（false nagatives），如果删除了某个元素，导致该映射位被置0，那么本来存在的元素会被漏报成不存在。 
+Bloom Filter 的位图模式带来两个问题：一是误报(false positives)，它能判断元素一定不存在，但只能判断可能存在，因为存在其它元素被映射到部分相同位上，导致该位置1，那么一个不存在的元素可能会被误报成存在；另一个是漏报（false nagatives），如果删除了某个元素，导致该映射位被置0，那么本来存在的元素会被漏报成不存在。 
 
 Cuckoo Filter，它既可以确保该元素存在的必然性，又可以在不违背此前提下删除任意元素，仅仅比 Bloom Filter 牺牲了微量空间效率。
 
