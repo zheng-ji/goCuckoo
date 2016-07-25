@@ -26,7 +26,8 @@ Description
 * 每个元素对应两个哈希算法，在哈希碰撞时会启用备用哈希算法。
 * 每一个桶是有4路的槽, 每个槽对应一个指纹。
 
-![model](https://cloud.githubusercontent.com/assets/1414745/17103080/10ce0d20-52af-11e6-937f-9c7d011f1e53.png)
+![model](https://cloud.githubusercontent.com/assets/1414745/17103208/e3c5e6e4-52af-11e6-921e-ffd14245561e.png)
+
 
 Feature
 --------
