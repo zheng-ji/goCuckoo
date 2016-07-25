@@ -12,17 +12,29 @@ A Cuckoo hashing, substituting for bloom filter. written by Go
 Description
 -----------
 
-Bloom Filter 的位图模式带来两个问题：一是误报(false positives)，它能判断元素一定不存在，但只能判断可能存在，因为存在其它元素被映射到部分相同位上，导致该位置1，那么一个不存在的元素可能会被误报成存在；另一个是漏报（false nagatives），如果删除了某个元素，导致该映射位被置0，那么本来存在的元素会被漏报成不存在。 
+面对海量数据，我们需要一个索引数据结构，用来帮助查询，快速判断数据记录是否存在，这类数据结构叫过滤器(filter),业界常用的选择是 `Bloom Filter`. `Cuckoo Filter` 是它的优化变种。
 
-Cuckoo Filter，它既可以确保该元素存在的必然性，又可以在不违背此前提下删除任意元素，仅仅比 Bloom Filter 牺牲了微量空间效率。
+`Bloom Filter` 的位图模式有两个问题：
+
+* 一是误报，它能判断元素一定不存在，但只能判断可能存在，因为存在其它元素被映射到部分相同位上，导致该位置1，那么一个不存在的元素可能会被误报成存在；
+
+* 另一个是漏报，如果删除了某个元素，导致该映射位被置0，那么本来存在的元素会被漏报成不存在。 
+
+`Cuckoo Filter`，可以确保该元素存在的必然性，又可以在不违背此前提下删除任意元素，仅仅比 `Bloom Filter` 牺牲了微量空间效率。
+
+`goCuckoo` 的数据模型: 每一个桶是有4路的槽, 每个元素都对应两个哈希算法,在哈希碰撞时会启用备用哈希算法。
+CMU的实验表示: 二维哈希表（4路slot）大约 90% 的占用率，冲突情况很少。
+
+[model](https://cloud.githubusercontent.com/assets/1414745/17102711/7601eb32-52ad-11e6-9f1c-2d39f095e1de.png)
 
 Feature
 --------
 
-* Deletion Support
-* FastLoopUp O(1)
-* High Space Utilization,4-way set-associative table: > 95% entries occupied
-* Subsituting for Bloom Filter.
+* 支持删除 Deletion Support
+* O（1）快速 FastLoopUp O(1)
+* 高效的空间利用，4路槽的占用率可以达到95% High Space Utilization,4-way set-associative table: > 95% entries occupied
+* 布隆过滤器的替代物 Subsituting for Bloom Filters
+
 
 Installation
 -------------
