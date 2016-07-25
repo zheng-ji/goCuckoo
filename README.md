@@ -19,9 +19,10 @@ Cuckoo Filter，它既可以确保该元素存在的必然性，又可以在不�
 Feature
 --------
 
+* Deletion Support
 * FastLoopUp O(1)
 * High Space Utilization,4-way set-associative table: > 95% entries occupied
-* More accurate than Bloom Filter.
+* Subsituting for Bloom Filter.
 
 Installation
 -------------
