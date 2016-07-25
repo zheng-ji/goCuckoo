@@ -45,7 +45,6 @@ func main() {
 	filter := cuckoo.NewCuckooFilter(10000)
 
 	filter.Insert([]byte("zheng-ji"))
-	filter.Insert([]byte("scut"))
 	filter.Insert([]byte("stupid"))
 	filter.Insert([]byte("coder"))
 
@@ -56,7 +55,7 @@ func main() {
 	}
 
 	filter.Del([]byte("stupid"))
-	filter.Println(filter.Count())
+	filter.Println(filter.Size())
 }
 ```
 
@@ -65,7 +64,7 @@ Documentation
 
 - [CMU Paper](http://www.cs.cmu.edu/~binfan/papers/conext14_cuckoofilter.pdf)
 - [CMU PPT](http://www.cs.cmu.edu/~binfan/papers/conext14_cuckoofilter.pptx)
-- [Blog](http://coolshell.cn/articles/17225.html)
+- [CoolShell Article](http://coolshell.cn/articles/17225.html)
 
 License
 -------
