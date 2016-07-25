@@ -42,7 +42,7 @@ import (
 
 func main() {
     // speicify capacity 
-	filter := cuckoo.NewCuckooFilter(10)
+	filter := cuckoo.NewCuckooFilter(10000)
 
 	filter.Insert([]byte("zheng-ji"))
 	filter.Insert([]byte("scut"))
