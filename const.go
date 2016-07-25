@@ -2,8 +2,8 @@
 package cuckoo
 
 const (
-	SlotSize       = 4
-	FingerSize     = 1
 	NotFound       = -1
-	MaxCuckooCount = 500
+	SlotSize       = 4
+	SignatureSize  = 1
+	MaxCuckooCount = 800
 )

@@ -1,29 +1,24 @@
 // zheng-ji.info
 package cuckoo
 
-import (
-//"fmt"
-)
+type Signature [SignatureSize]byte
+type Bucket [SlotSize]Signature
 
-// 指纹
-type Fp [FingerSize]byte
-type Bucket [SlotSize]Fp
+var Empty = Signature{0}
 
-var Empty = Fp{0}
-
-func (bk *Bucket) insert(fp Fp) bool {
-	for index, vfp := range bk {
-		if vfp == Empty {
-			bk[index] = fp
+func (bk *Bucket) insert(sign Signature) bool {
+	for index, vsign := range bk {
+		if vsign == Empty {
+			bk[index] = sign
 			return true
 		}
 	}
 	return false
 }
 
-func (bk *Bucket) del(fp Fp) bool {
-	for index, vfp := range bk {
-		if vfp == fp {
+func (bk *Bucket) del(sign Signature) bool {
+	for index, vsign := range bk {
+		if vsign == sign {
 			bk[index] = Empty
 			return true
 		}
@@ -31,9 +26,9 @@ func (bk *Bucket) del(fp Fp) bool {
 	return false
 }
 
-func (bk *Bucket) lookupIndex(fp Fp) int {
-	for index, vfp := range bk {
-		if vfp == fp {
+func (bk *Bucket) lookupIndex(sign Signature) int {
+	for index, vsign := range bk {
+		if vsign == sign {
 			return index
 		}
 	}

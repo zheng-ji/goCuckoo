@@ -15,7 +15,7 @@ func TestCuckoo(t *testing.T) {
 	filter.Insert([]byte("stupid"))
 
 	t.Log(filter.buckets)
-	t.Log(filter.Count())
+	t.Log(filter.Size())
 
 	if filter.Find([]byte("stupid")) {
 		t.Log("exist")
@@ -31,5 +31,5 @@ func TestCuckoo(t *testing.T) {
 	}
 
 	t.Log(filter.buckets)
-	t.Log(filter.Count())
+	t.Log(filter.Size())
 }

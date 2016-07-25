@@ -15,33 +15,33 @@ func getCeilingCap(capacity uint64) uint {
 	return uint(math.Pow(2, float64(num)))
 }
 
-func genFp(data []byte) Fp {
+func genSignature(data []byte) Signature {
 	hashInstance := fnv.New64()
 	hashInstance.Reset()
 	hashInstance.Write(data)
 	hash := hashInstance.Sum(nil)
-	fp := Fp{}
-	for i := 0; i < FingerSize; i++ {
-		fp[i] = hash[i]
+	sign := Signature{}
+	for i := 0; i < SignatureSize; i++ {
+		sign[i] = hash[i]
 	}
-	if fp == Empty {
-		fp[0] ^= 1
+	if sign == Empty {
+		sign[0] ^= 1
 	}
-	return fp
+	return sign
 }
 
-func genFirstIndex(fp Fp, numBuckets uint) uint {
+func genFirstIndex(sign Signature, numBuckets uint) uint {
 	bytes := make([]byte, 64, 64)
-	for i, b := range fp {
+	for i, b := range sign {
 		bytes[i] = b
 	}
 	hash := binary.LittleEndian.Uint64(bytes)
 	return uint(hash) & (numBuckets - 1)
 }
 
-func genBackupIndex(fp Fp, numBuckets uint) uint {
+func genBackupIndex(sign Signature, numBuckets uint) uint {
 	bytes := make([]byte, 64, 64)
-	for i, b := range fp {
+	for i, b := range sign {
 		bytes[i] = b
 	}
 	hash := binary.BigEndian.Uint64(bytes)
