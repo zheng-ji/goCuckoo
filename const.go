@@ -1,9 +1,17 @@
 // zheng-ji.info
+
 package cuckoo
 
 const (
-	NotFound       = -1
-	SlotSize       = 4
-	SignatureSize  = 1
+	// NotFound const
+	NotFound = -1
+
+	// SlotSize const
+	SlotSize = 4
+
+	// SignatureSize const
+	SignatureSize = 1
+
+	// MaxCuckooCount max times to try when collision
 	MaxCuckooCount = 800
 )

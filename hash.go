@@ -1,4 +1,5 @@
 // zheng-ji.info
+
 package cuckoo
 
 import (
@@ -10,7 +11,7 @@ import (
 func getCeilingCap(capacity uint64) uint {
 	num := 1
 	for ; capacity/2 != 0; capacity = capacity / 2 {
-		num += 1
+		num++
 	}
 	return uint(math.Pow(2, float64(num)))
 }

@@ -1,17 +1,21 @@
 // zheng-ji.info
+
 package cuckoo
 
 import (
-	//"fmt"
 	"math/rand"
+	"sync"
 )
 
-type CuckooFilter struct {
+// Filter struct
+type Filter struct {
 	num     int
 	buckets []Bucket
+	lock    *sync.Mutex
 }
 
-func NewCuckooFilter(capacity uint) *CuckooFilter {
+// NewFilter Init a Filter with capacity
+func NewFilter(capacity uint) *Filter {
 	capacity = getCeilingCap(uint64(capacity)) / SlotSize
 	if capacity == 0 {
 		capacity = 1
@@ -20,13 +24,15 @@ func NewCuckooFilter(capacity uint) *CuckooFilter {
 	for i := range buckets {
 		buckets[i] = [SlotSize]Signature{}
 	}
-	return &CuckooFilter{
+	return &Filter{
 		buckets: buckets,
 		num:     0,
+		lock:    new(sync.Mutex),
 	}
 }
 
-func (filter *CuckooFilter) Find(data []byte) bool {
+// Find Func，check an entry exist or not
+func (filter *Filter) Find(data []byte) bool {
 	sign := genSignature(data)
 	firstIndex := genFirstIndex(sign, uint(len(filter.buckets)))
 	backupIndex := genBackupIndex(sign, uint(len(filter.buckets)))
@@ -40,7 +46,11 @@ func (filter *CuckooFilter) Find(data []byte) bool {
 	return false
 }
 
-func (filter *CuckooFilter) Insert(data []byte) bool {
+// Insert Func，Insert an entry
+func (filter *Filter) Insert(data []byte) bool {
+	filter.lock.Lock()
+	defer filter.lock.Unlock()
+
 	sign := genSignature(data)
 	firstIndex := genFirstIndex(sign, uint(len(filter.buckets)))
 	backupIndex := genBackupIndex(sign, uint(len(filter.buckets)))
@@ -53,7 +63,7 @@ func (filter *CuckooFilter) Insert(data []byte) bool {
 	return filter.resolveCollision(sign, backupIndex)
 }
 
-func (filter *CuckooFilter) resolveCollision(sign Signature, index uint) bool {
+func (filter *Filter) resolveCollision(sign Signature, index uint) bool {
 	for i := 0; i < MaxCuckooCount; i++ {
 		j := rand.Intn(SlotSize)
 		tmpsign := sign
@@ -69,7 +79,11 @@ func (filter *CuckooFilter) resolveCollision(sign Signature, index uint) bool {
 	return false
 }
 
-func (filter *CuckooFilter) Del(data []byte) bool {
+// Del Func:delete entry
+func (filter *Filter) Del(data []byte) bool {
+	filter.lock.Lock()
+	defer filter.lock.Unlock()
+
 	sign := genSignature(data)
 	firstIndex := genFirstIndex(sign, uint(len(filter.buckets)))
 	backupIndex := genBackupIndex(sign, uint(len(filter.buckets)))
@@ -78,6 +92,7 @@ func (filter *CuckooFilter) Del(data []byte) bool {
 	return bk1.del(sign) || bk2.del(sign)
 }
 
-func (filter *CuckooFilter) Size() int {
+// Size Fun: get size of Filter's element
+func (filter *Filter) Size() int {
 	return filter.num
 }

@@ -1,9 +1,14 @@
 // zheng-ji.info
+
 package cuckoo
 
+// Signature Type,mean FingerPrint
 type Signature [SignatureSize]byte
+
+// Bucket Type, has slotsize signature
 type Bucket [SlotSize]Signature
 
+// Empty Signature
 var Empty = Signature{0}
 
 func (bk *Bucket) insert(sign Signature) bool {

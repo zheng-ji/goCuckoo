@@ -1,4 +1,5 @@
 // zheng-ji.info
+
 package cuckoo
 
 import (
@@ -6,7 +7,7 @@ import (
 )
 
 func TestCuckoo(t *testing.T) {
-	filter := NewCuckooFilter(10)
+	filter := NewFilter(10)
 	t.Log(getCeilingCap(uint64(10)) / SlotSize)
 
 	filter.Insert([]byte("zheng-ji"))
