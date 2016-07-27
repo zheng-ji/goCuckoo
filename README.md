@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/zheng-ji/goCuckoo.svg)](https://travis-ci.org/zheng-ji/goCuckoo)
 [![GoDoc](https://godoc.org/github.com/zheng-ji/goCuckoo?status.svg)](https://godoc.org/github.com/zheng-ji/goCuckoo)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zheng-ji/goCuckoo)](https://goreportcard.com/report/github.com/zheng-ji/goCuckoo)
+
 
 A Cuckoo hashing, substituting for bloom filter. written by Go
 
