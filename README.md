@@ -5,7 +5,7 @@
 
 A Cuckoo hashing, substituting for bloom filter. written by Go
 
-一个 Cuckoo Filter 的 Go 库
+一个 CuckooFilter 的 Go 库, BloomFilter 的替代物
 
 ![goCuckoo](https://cloud.githubusercontent.com/assets/1414745/17084380/8c3a4896-51ee-11e6-869e-b087226cc5ce.jpg)
 
@@ -22,7 +22,7 @@ Description
 `Cuckoo Filter`，可以确保该元素存在的必然性，又可以在不违背此前提下删除任意元素，仅仅比 `Bloom Filter` 牺牲了微量空间效率。 它的的数据模型: 
 
 * 每个元素对应两个哈希算法，在哈希碰撞时会启用备用哈希算法。
-* 每一个桶是有4路的，每个槽对应一个指纹。
+* 每一个桶是有4路的槽，每个槽对应一个指纹。
 
 ![model](https://cloud.githubusercontent.com/assets/1414745/17103421/c97635e0-52b0-11e6-83ac-1b1fdbb5d31c.png)
 
