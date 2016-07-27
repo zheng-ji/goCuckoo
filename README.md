@@ -56,7 +56,7 @@ import (
 
 func main() {
     // speicify capacity 
-	filter := cuckoo.NewCuckooFilter(10000)
+	filter := cuckoo.NewFilter(10000)
 
 	filter.Insert([]byte("zheng-ji"))
 	filter.Insert([]byte("stupid"))
@@ -84,4 +84,3 @@ License
 -------
 
 Copyright (c) 2016 by [zheng-ji](http://zheng-ji.info) released under MIT License.
-
